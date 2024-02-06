@@ -14,18 +14,14 @@ content are referred to as publishers, and those seeking to consume it are calle
 
 The components of our system include::
 * **Rendezvous Manager**: A centralized component that manages the state of the users, maintaining an updated
-    mapping of publishers/subscribers-channels.
+    mapping between publishers/subscribers and channels.
 * **Topology Manager**: A centralized entity responsible for maintaining an up-to-date network graph.
     It communicates with the Rendezvous Manager in order to generate bloom filters used for message routing.
-    These bloom filters are then distributed to all involved Openflow switches.
-* **Openflow Switches**: These are the switching devices responsible for forwarding messages by creating forwarding rules based on
-    the received bloom filters from the Topology Manager. Additionally, switches utilize the OpenFlow protocol to 
-    forward packets containing publisher/subscriber requests, encapsulated in custom packets, to the Rendezvous Manager.
-
-The architecture of our system is presented in the following figure.
-\
-\
-![Architecture](figs/Architecture.png)
+    Finally, it appends appropriate forwarding rules to all involved OpenFlow switches based on the generated bloom filters.
+* **Openflow Switches**: These are the switching devices responsible for forwarding messages, utilizing the forwarding rules 
+    received from the Topology Manager. 
+    Additionally, switches employ the OpenFlow protocol to 
+    forward publisher/subscriber requests, encapsulated in custom packets, to the Rendezvous Manager.
 
 One potential application of this work is in Web-based IPTV. In this scenario, channel providers can register as publishers, 
 delivering their broadcasts to interested subscribers who meet the specified requirements.
@@ -37,10 +33,10 @@ a mininet simulated network.
 
 The generation of bloom filters is conducted as follows. Initially, each link in the network graph is assigned a unique 
 126-bit binary number, referred to as the link ID. The Topology Manager generates a tree containing the shortest paths 
-between the publisher and subscriber nodes. The bloom filter, employed for multicast message transmission, is constructed by performing a bitwise OR operation on the link IDs of all the links in the derived tree.
+between the publisher and subscriber nodes. The bloom filter, employed for multicast message transmission, is constructed by performing a bitwise OR operation on the link IDs of all the links in the generated tree.
 
-A bloom filter is inserted into all packets transmitted by the corresponding publisher. A router determines the links to forward a 
-packet to by checking the result of the condition Bloom_Filter AND Link_ID = Link_ID.
+A bloom filter specific to a particular publisher for a specific channel is inserted into all packets transmitted by the publisher. 
+A router determines the links to forward a packet to by checking the condition ````bloom_filter AND link_ID == link_ID````.
 
 
 
