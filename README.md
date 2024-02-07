@@ -14,7 +14,7 @@ content are referred to as publishers, and those seeking to consume it are calle
 
 The components of our system include::
 * **Rendezvous Manager**: A centralized component that manages the state of the users, maintaining an updated
-    mapping between publishers/subscribers-channels.
+    mapping between publishers/subscribers and channels.
 * **Topology Manager**: A centralized entity responsible for maintaining an up-to-date network graph.
     It communicates with the Rendezvous Manager in order to generate bloom filters used for message routing.
     Finally, it appends appropriate forwarding rules to all involved OpenFlow switches based on the generated bloom filters.
