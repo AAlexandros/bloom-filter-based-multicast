@@ -5,7 +5,7 @@ The research was conducted in the context of the European project
 [“Point: iP Over IcN – the betTer ip"](https://cordis.europa.eu/project/id/643990). 
 
 For those interested in experimenting with my prototype, please feel free to contact me, and I will provide you with a Linux-based 
-virtual box containing a preconfigured and set-up environment.
+virtual machine containing a preconfigured and set-up environment.
 
 ## High Level Architecture
 
@@ -22,6 +22,11 @@ The components of our system include::
     received from the Topology Manager. 
     Additionally, switches employ the OpenFlow protocol to 
     forward publisher/subscriber requests, encapsulated in custom packets, to the Rendezvous Manager.
+
+The architecture of our system is presented in the following figure.
+\
+\
+![Architecture](figs/Architecture.jpg)
 
 One potential application of this work is in Web-based IPTV. In this scenario, channel providers can register as publishers, 
 delivering their broadcasts to interested subscribers who meet the specified requirements.
